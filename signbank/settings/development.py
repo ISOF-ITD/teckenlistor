@@ -46,7 +46,7 @@ LOGGING = {
         'file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': '/home/heilniem/signbank-fi/debug.log',
+            'filename': 'C://Users//localperla331//PycharmProjects//log//signbankdebug.log',
         },
     },
     'loggers': {
