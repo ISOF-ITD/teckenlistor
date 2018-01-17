@@ -23,7 +23,7 @@ TIME_ZONE = 'Europe/Stockholm'
 
 # A string representing the language code for this installation. This should be in standard language ID format.
 # For example, U.S. English is "en-us".
-#LANGUAGE_CODE = 'fi'
+LANGUAGE_CODE = 'fi'
 LANGUAGE_CODE = 'en'
 
 # The ID, as an integer, of the current site in the django_site database table.
@@ -37,7 +37,7 @@ USE_TZ = True
 # A list of all available languages.
 # The list is a list of two-tuples in the format (language code, language name) - for example, ('ja', 'Japanese').
 LANGUAGES = (
-#    ('fi', _('Finnish')),
+   ('fi', _('Finnish')),
     ('en', _('English')),
 )
 
