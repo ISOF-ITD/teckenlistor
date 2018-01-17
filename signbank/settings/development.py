@@ -25,7 +25,7 @@ STATICFILES_DIRS = (
 )
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
-MEDIA_ROOT = '/home/heilniem/signbank-fi/media/'
+MEDIA_ROOT = 'C:/data/teckenvideo'
 # URL that handles the media served from MEDIA_ROOT, used for managing stored files.
 # It must end in a slash if set to a non-empty value.
 MEDIA_URL = '/media/'
