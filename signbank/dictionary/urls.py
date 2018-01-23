@@ -71,6 +71,9 @@ urlpatterns = [
     # Public views for dictionary
     url(r'^public/gloss/$', publicviews.GlossListPublicView.as_view(), name='public_gloss_list'),
     url(r'^public/gloss/(?P<pk>\d+)', publicviews.GlossDetailPublicView.as_view(), name='public_gloss_view'),
+    # ISOF test:
+    url(r'^public/glosstags/$', publicviews.GlossListPublicTagsView.as_view(), name='public_gloss_list'),
+    url(r'^public/glosstags/(?P<pk>\d+)', publicviews.GlossDetailPublicView.as_view(), name='public_gloss_view'),
 
     # A view for the developer to try out some things
     # url(r'^try/$', views.try_code),

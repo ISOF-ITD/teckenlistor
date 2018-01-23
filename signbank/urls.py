@@ -35,7 +35,7 @@ urlpatterns = [
 
     # Hardcoding a number of special urls:
     url(r'^signs/search/$', permission_required('dictionary.search_gloss')(GlossListView.as_view()),
-        name='admin_gloss_list'),
+            name='admin_gloss_list'),
     url(r'^signs/add/$', dictionary_views.add_new_sign, name='create_gloss'),
     # TODO: Remove this in the future
     # url(r'^signs/import_csv/$', dictionary_views.import_csv, name='old_import_csv'),

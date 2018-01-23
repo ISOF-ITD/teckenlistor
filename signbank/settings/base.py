@@ -23,7 +23,8 @@ TIME_ZONE = 'Europe/Stockholm'
 
 # A string representing the language code for this installation. This should be in standard language ID format.
 # For example, U.S. English is "en-us".
-LANGUAGE_CODE = 'fi'
+#LANGUAGE_CODE = 'fi'
+# LANGUAGE_CODE = 'sv'
 LANGUAGE_CODE = 'en'
 
 # The ID, as an integer, of the current site in the django_site database table.
@@ -39,6 +40,7 @@ USE_TZ = True
 LANGUAGES = (
    ('fi', _('Finnish')),
     ('en', _('English')),
+   # ('sv', _('Swedish')),
 )
 
 # URL to use when referring to static files located in STATIC_ROOT.
