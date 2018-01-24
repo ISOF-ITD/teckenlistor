@@ -9,7 +9,7 @@ from django.db.models.functions import Substr, Upper
 
 from .models import Gloss, Translation, GlossTranslations, SignLanguage, Dataset, GlossRelation
 # ISOF Per
-from tagging.models import Tag
+from tagging.models import Tag, TaggedItem
 
 from ..video.models import GlossVideo
 from .forms import GlossPublicSearchForm
@@ -64,12 +64,29 @@ class GlossListPublicTagsView(ListView):
             val = get['search']
 
             # ISOF test
-            category = get.get('category_selected', 'Alla')
+            category = get.get('tags', 'Alla')
 
             # Filters
             qs = qs.filter(Q(idgloss__istartswith=val) | Q(translation__keyword__text__istartswith=val)
                            # | Q(idgloss_en__icontains=val) # idgloss_en not shown in results, therefore removed.
                            )
+
+        # From class GlossListView(ListView) in adminviews.py
+        if 'tags' in get and get['tags'] != '':
+            vals = get.getlist('tags')
+
+            tags = []
+            for t in vals:
+                tags.extend(Tag.objects.filter(pk=t))
+
+            # search is an implicit AND so intersection
+            tqs = TaggedItem.objects.get_intersection_by_model(Gloss, tags)
+
+            # intersection
+            qs = qs & tqs
+
+            # print "J :", len(qs)
+
 
         qs = qs.distinct()
 

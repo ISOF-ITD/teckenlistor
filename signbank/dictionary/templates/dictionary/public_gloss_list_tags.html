@@ -96,12 +96,12 @@ $( document ).ready(function() {
             <div class="panel-body">
             <form action="{% url 'dictionary:public_gloss_list' %}" method="get" class="form">
 
-                {#ISOF test#}
+                {#ISOF kategorier som tag#}
                 <div class="category">
-                <select name="category_selected" >
-                    <option selected="selected">Objects on page:</option>
+                <select name="tags" >
+                    <option value=0 selected="selected">Kategorier:</option>
                     {% for tag in tags %}
-                        <option value={{ tag }}>{{ tag }}</option>
+                        <option value={{ tag.id }}>{{ tag }}</option>
                     {% endfor %}
                 </select>
                 <br/>
