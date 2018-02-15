@@ -18,3 +18,4 @@ debug.log
 /codecov.sh
 /signbank/settings/development.py
 /signbank/settings/settings_secret.py
+/signbank/settings/settings_secret.py.template
