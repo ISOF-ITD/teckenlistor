@@ -294,6 +294,10 @@ td .tag {
     padding-left: 3px;
     padding-right: 3px;
 }
+/*https://stackoverflow.com/questions/4528085/toggle-show-hide-div-with-button*/
+.hide-video {
+    display:none;
+}
 .video-public {
     cursor:pointer;
 }
