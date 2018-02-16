@@ -6,6 +6,9 @@ from signbank.settings.base import *
 # The following settings are defined in settings_secret:
 # SECRET_KEY, ADMINS, DATABASES, EMAIL_HOST, EMAIL_PORT, DEFAULT_FROM_EMAIL
 
+# ISOF extra:
+PROJECT_NAME = '/teckenlistor'
+
 # IMPORTANT: Debug should always be False in production
 DEBUG = False
 
