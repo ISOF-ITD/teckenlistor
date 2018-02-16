@@ -88,7 +88,8 @@ class GlossVideo(models.Model):
             pass
 
     def get_absolute_url(self):
-        return self.videofile.url
+        # return self.videofile.url
+        return self.videofile.url.replace('\\', '/')
 
     def rename_video(self):
         """Rename the video and the video to correct path if the glossvideo object has a foreignkey to a gloss."""
