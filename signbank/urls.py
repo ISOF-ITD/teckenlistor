@@ -41,8 +41,9 @@ urlpatterns = [
     # url(r'^signs/import_csv/$', dictionary_views.import_csv, name='old_import_csv'),
 
     # Registration urls for login, logout, registration, activation etc.
+    # C:\Users\localperla331\AppData\Local\Programs\Python\Python36\Lib\site-packages\registration\backends\hmac
     url(r'^accounts/register/$', RegistrationView.as_view(form_class=CustomUserForm), name='registration_register',),
-    url(r'^accounts/', include('registration.backends.hmac.urls')),
+    url(r'^accounts/', include('registration.backends.hmac.urls'), ),
 
     # Django-contrib-comments urls
     url(r'^comments/', include('django_comments.urls')),

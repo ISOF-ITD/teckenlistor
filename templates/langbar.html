@@ -11,20 +11,22 @@
         </button>
         <ul class="dropdown-menu dropdown-menu-right">
             {% if request.user.is_staff %}
-            <li><a href="{{ application_url }}/admin/">{% blocktrans %}Django admin{% endblocktrans %}</a></li>
+            <li><a href="{{ application_root }}/admin/">{% blocktrans %}Django admin{% endblocktrans %}</a></li>
             <li role="separator" class="divider"></li>
             {% endif %}
-            <li><a href="{{ application_url }}/accounts/password/change/">{% blocktrans %}Change password{% endblocktrans %}</a></li>
+            <li><a href="{{ application_root }}/accounts/password/change/">{% blocktrans %}Change password{% endblocktrans %}</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="{{ application_url }}/accounts/logout/"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+            <li><a href="{{ application_root }}/accounts/logout/"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
                 {% blocktrans %}Sign out{% endblocktrans %}</a></li>
         </ul>
     </div>
     {% else %}
     {# Translators: Sign in link #}
-    <a class="btn btn-default" role="button" href="{{ application_url }}/accounts/login/">
+    <a class="btn btn-default" role="button" href="{{ application_root }}/accounts/login/">
+{#    <a class="btn btn-default" role="button" href="{% url 'registration_accounts' %}">#}
+{#    <a class="btn btn-default" role="button" href="{% url 'signbank.urls.registration_accounts' %}">#}
         {% blocktrans %}Sign in{% endblocktrans %}</a>
-    <a class="btn btn-info" role="button" href="{{ application_url }}/accounts/register/">
+    <a class="btn btn-info" role="button" href="{{ application_root }}/accounts/register/">
         {% blocktrans %}Create account{% endblocktrans %}
     </a>
     {% endif %}

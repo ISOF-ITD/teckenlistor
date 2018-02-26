@@ -15,14 +15,15 @@ from ..video.models import GlossVideo
 from .forms import GlossPublicSearchForm
 from .adminviews import populate_tags_for_object_list
 
-def applicationUrl(request):
+def applicationRoot(request):
     if request is not None:
         paths = request.get_full_path().split('/')
-        application_url = ''
+        application_root = ''
         if paths[1] == 'teckenlistor':
-            application_url = '/teckenlistor'
+            application_root = paths[1]
+            # application_root = '/teckenlistor'
             # environment_url = paths[2:]
-    return application_url
+    return application_root
 
 class GlossListPublicTagsView(ListView):
     model = Gloss
@@ -45,8 +46,8 @@ class GlossListPublicTagsView(ListView):
         # tags_list = Tag.objects.filter(approved=0).order_by('-date')[:30]
         tag_list = Tag.objects.all()
         context["tags"] = tag_list
-        application_url = applicationUrl(self.request)
-        context["application_url"] = application_url
+        application_root = applicationRoot(self.request)
+        context["application_root"] = application_root
         # populate_tags_for_object_list(context['object_list'], model=self.object_list.model)
 
         return context
