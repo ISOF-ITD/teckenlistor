@@ -31,7 +31,7 @@ STATICFILES_DIRS = (
 )
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
-MEDIA_ROOT = '/var/www/django/signbank/media/'
+MEDIA_ROOT = '/var/www/django/media/'
 # MEDIA_ROOT = '/var/www/signbank/media/'
 # URL that handles the media served from MEDIA_ROOT, used for managing stored files.
 # It must end in a slash if set to a non-empty value.
