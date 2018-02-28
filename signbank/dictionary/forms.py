@@ -39,8 +39,7 @@ class GlossCreateForm(forms.ModelForm):
 
     class Meta:
         model = Gloss
-        fields = ['dataset', 'idgloss', 'videofile']
-        # fields = ['dataset', 'idgloss', 'idgloss_en', 'videofile']
+        fields = ['dataset', 'idgloss', 'idgloss_en', 'videofile']
 
     def clean(self):
         """
