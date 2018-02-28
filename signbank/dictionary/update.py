@@ -43,7 +43,8 @@ def add_gloss(request):
             if form.cleaned_data["tag"]:
                 Tag.objects.add_tag(new_gloss, form.cleaned_data["tag"].name)
 
-            redirecturl = '/dictionary/gloss/' + str(new_gloss.pk) + '/?edit'
+            # redirecturl = '/dictionary/gloss/' + str(new_gloss.pk) + '/?edit'
+            redirecturl = reverse('dictionary:admin_gloss_view', args=[str(new_gloss.pk)]) + '/?edit'
             addvideo(request, new_gloss.pk, redirecturl)
             #return HttpResponseRedirect(reverse('dictionary:admin_gloss_list'))
             return HttpResponseRedirect(redirecturl)
