@@ -99,7 +99,7 @@ $( document ).ready(function() {
                 {#ISOF kategorier som tag#}
                 <div class="category">
                 <select name="tags" >
-                    <option value=0 selected="selected">Kategorier:</option>
+                    <option value='' selected="selected">Kategorier:</option>
                     {% for tag in tags %}
                         <option value={{ tag.id }}>{{ tag }}</option>
                     {% endfor %}
