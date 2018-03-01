@@ -43,7 +43,7 @@ urlpatterns = [
     # Registration urls for login, logout, registration, activation etc.
     # C:\Users\localperla331\AppData\Local\Programs\Python\Python36\Lib\site-packages\registration\backends\hmac
     url(r'^accounts/register/$', RegistrationView.as_view(form_class=CustomUserForm), name='registration_register',),
-    url(r'^accounts/', include('registration.backends.hmac.urls'), ),
+    url(r'^accounts/', include('registration.backends.hmac.urls'), name='registration_site',),
 
     # Django-contrib-comments urls
     url(r'^comments/', include('django_comments.urls')),
@@ -66,7 +66,7 @@ urlpatterns = [
     # Admin urls
     url(r'^admin/doc/',
         include('django.contrib.admindocs.urls')),
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/', include(admin.site.urls), ),
 
     # Speciall admin sub site for Publisher role
     url(r'^publisher/', include(publisher_admin.urls)),

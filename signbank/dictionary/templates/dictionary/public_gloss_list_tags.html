@@ -145,7 +145,7 @@ $( document ).ready(function() {
                     </div>
                 </div>
             </div>
-             <div class="panel-body embed-responsive embed-responsive-16by9"
+             <div class="panel-body embed-responsive embed-responsive-16by9 hide-video"
                  {% if obj.glossvideo_set.all.count > 0 %}style="background-color:rgb(33,33,33);"{% endif %}>
             {% if obj.glossvideo_set.all.0 %}
                 <video id="glossvideo-{{obj.glossvideo_set.all.0.pk}}" class="video-public" preload="metadata" muted
@@ -163,7 +163,7 @@ $( document ).ready(function() {
                 <p><em>{% blocktrans %}No video.{% endblocktrans %}</em></p>
             {% endif %}
             </div>
-            <div class="panel-footer">
+            <div class="panel-footer hide-video">
             <h4>{% blocktrans context "publicglosslist" %}Translations{% endblocktrans %} ({{ lang.name_local }}):</h4>
             <span class="gloss-keywords">
             {% if obj.glosstranslations_set.exists %}
