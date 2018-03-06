@@ -10,6 +10,7 @@ from . import update
 from . import delete
 from . import views
 from . import tagviews
+from .publicviews import GlossAutoCompleteView
 
 urlpatterns = [
     # Gloss search url for the menu search field(s)
@@ -74,7 +75,11 @@ urlpatterns = [
     # ISOF test:
     url(r'^public/glosstags/$', publicviews.GlossListPublicTagsView.as_view(), name='public_gloss_list'),
     url(r'^public/glosstags/(?P<pk>\d+)', publicviews.GlossDetailPublicView.as_view(), name='public_gloss_view'),
-
+    url(
+        r'^gloss-autocomplete/$',
+        GlossAutoCompleteView.as_view(),
+        name='gloss-autocomplete',
+    ),
     # A view for the developer to try out some things
     # url(r'^try/$', views.try_code),
 ]

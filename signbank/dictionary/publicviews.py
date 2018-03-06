@@ -15,6 +15,12 @@ from ..video.models import GlossVideo
 from .forms import GlossPublicSearchForm
 from .adminviews import populate_tags_for_object_list
 
+# autocomplete
+# from dal import autocomplete
+from django.views.generic.edit import FormView
+import json
+from django.http import HttpResponse
+
 def applicationRoot(request):
     if request is not None:
         paths = request.get_full_path().split('/')
@@ -24,6 +30,40 @@ def applicationRoot(request):
             # application_root = '/teckenlistor'
             # environment_url = paths[2:]
     return application_root
+
+# Only test
+# class GlossAutocomplete(autocomplete.Select2QuerySetView):
+#     def get_queryset(self):
+#         # Don't forget to filter out results depending on the visitor !
+#         if not self.request.user.is_authenticated():
+#             return Gloss.objects.none()
+#
+#         qs = Gloss.objects.all()
+#
+#         if self.q:
+#             qs = qs.filter(idgloss__istartswith=self.q)
+#
+#         return qs
+
+# *code in view which returns json data *
+class GlossAutoCompleteView(FormView):
+    def get(self,request,*args,**kwargs):
+        data = request.GET
+        name = data.get("term")
+        if name:
+            glosses = Gloss.objects.filter(idgloss__istartswith = name)
+        else:
+            glosses = Gloss.objects.all()
+        results = []
+        for gloss in glosses:
+            all_json = {}
+            all_json['id'] = gloss.id
+            all_json['label'] = gloss.idgloss
+            all_json['value'] = gloss.idgloss
+            results.append(all_json)
+        data = json.dumps(results)
+        mimetype = 'application/json'
+        return HttpResponse(data, mimetype)
 
 class GlossListPublicTagsView(ListView):
     model = Gloss
@@ -46,9 +86,12 @@ class GlossListPublicTagsView(ListView):
         # tags_list = Tag.objects.filter(approved=0).order_by('-date')[:30]
         tag_list = Tag.objects.all()
         context["tags"] = tag_list
-        application_root = applicationRoot(self.request)
-        context["application_root"] = application_root
+        # application_root = applicationRoot(self.request)
+        # context["application_root"] = application_root
         # populate_tags_for_object_list(context['object_list'], model=self.object_list.model)
+
+        # context['gloss_choices'] = Gloss.objects.filter(dataset=self.request.GET.get('dataset'))
+        context['gloss_choices'] = Gloss.objects.all()
 
         return context
 
