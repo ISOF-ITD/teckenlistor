@@ -21,7 +21,7 @@
             <div id="leftcontentborder"></div>
             <div id="rightcontentborder"></div>
             <header id="header">{# Translators: Site title #}
-                <h1><a href="{% url 'root_page' %}">{% blocktrans %}FinSL Signbank{% endblocktrans %}</a></h1>
+                <h1><a href="{% url 'root_page' %}">{% blocktrans %}Teckenlistan FinSL Signbank{% endblocktrans %}</a></h1>
                 <div id="langbar">{% include "langbar.html" %}</div>
             </header>
             <div id="menu">
@@ -43,7 +43,7 @@
                    <a href="http://www.kuurojenliitto.fi/" rel="external">
                      <img id="logokl"
                        {% if LANGUAGE_CODE == 'fi' %}src="{% static 'img/kl-logo_fin_100-compressor.png' %}"
-                       {% elif LANGUAGE_CODE == 'se' %}src="{% static 'img/kl-logo_sve_100-compressor.png' %}"
+                       {% elif LANGUAGE_CODE == 'sv-se' %}src="{% static 'img/kl-logo_sve_100-compressor.png' %}"
                        {% else %}src="{% static 'img/kl-logo_eng_100-compressor.png' %}"
                        {% endif %}
                        class="logofooter" alt="{% blocktrans %}Finnish Association of the Deaf{% endblocktrans %}">
