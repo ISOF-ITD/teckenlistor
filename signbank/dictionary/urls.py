@@ -78,7 +78,7 @@ urlpatterns = [
     url(
         r'^gloss-autocomplete/$',
         GlossAutoCompleteView.as_view(),
-        name='gloss-autocomplete',
+        name='gloss_autocomplete',
     ),
     # A view for the developer to try out some things
     # url(r'^try/$', views.try_code),
