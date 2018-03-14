@@ -252,7 +252,8 @@ $('#id_comment').atwho({
                             <fieldset>
                                 {# Translators: Upload/Add new video to Signbank #}
                                 <legend>{% blocktrans %}Upload New Video{% endblocktrans %}</legend>
-                                <form action="/video/upload/gloss/" method="post" enctype="multipart/form-data">
+{#                                <form action="/video/upload/gloss/" method="post" enctype="multipart/form-data">#}
+                                <form action="{% url 'video:upload_gloss' %}" method="post" enctype="multipart/form-data">
                                     {% csrf_token %}
                                     <input type='hidden' name='redirect' value='{{request.path}}?edit'>
                                         {% bootstrap_field videoform.videofile %}
