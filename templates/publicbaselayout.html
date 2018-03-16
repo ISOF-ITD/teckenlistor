@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+{% load bootstrap3 %}
+{% load stylesheet %}
+{% load i18n %}
+{% load staticfiles %}
+{% get_current_language as LANGUAGE_CODE %}
+<html lang="{{LANGUAGE_CODE|default:'en'}}">
+  <head>
+    <title>ISOFSL Signbank{% block bootstrap3_title %}{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" media="screen" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/signbank.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/dataset.css' %}">
+    {% block extrahead %}{% endblock %}
+  </head>
+  <body>
+    <div id="wrap">
+        <div class="container">
+            <div id="leftcontentborder"></div>
+            <div id="rightcontentborder"></div>
+            {% bootstrap_messages %}
+            <main role="main">
+            {% block content %}{% blocktrans %}(No content){% endblocktrans %}{% endblock %}
+            </main>
+        </div>
+    </div>
+    <footer id="footer">
+       <div id="footercontainer" class="container">
+            <div class="footerbg">
+            </div>
+        </div>
+    </footer>
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+
+<script>
+$('a.close').click(function(event){
+    event.preventDefault();
+    event.stopPropagation();
+    var parent = $(this).parent();
+    $.get(event.currentTarget.href).done(function () {
+        parent.remove();
+        var badge = $('#live_notify_badge');
+        var val = parseInt(badge.text())
+        badge.text(val - 1);
+        if (val - 1 <= 0) {
+            $('button#notifications-list').removeClass('btn-danger');
+        }
+    });
+});
+$('a#notifications_mark_all_read').click(function(event){
+    event.preventDefault();
+    event.stopPropagation();
+    $.get(event.currentTarget.href).done(function () {
+        $('div.notification').remove();
+        var badge = $('#live_notify_badge');
+        badge.text("0");
+        $('button#notifications-list').removeClass('btn-danger');
+    });
+});
+</script>
+    {% block extrajs %}{% endblock %}
+  </body>
+</html>
+    
+
+  

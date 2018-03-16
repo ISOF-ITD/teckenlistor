@@ -33,7 +33,7 @@
             <hr>
             <h3>{{glossvideo.title}}</h3>
             <div class="embed-responsive embed-responsive-16by9">
-                <video id="glossvideo-{{glossvideo.pk}}" preload="metadata" controls muted
+                <video autoplay id="glossvideo-{{glossvideo.pk}}" preload="metadata" controls muted
                 {% if glossvideo.posterfile %} poster="{{glossvideo.posterfile.url|urlencode}}"{% endif %}>
                 {% if glossvideo.get_extension == '.mp4' %}
                     <source src="{{glossvideo.videofile.url|urlencode}}" type="video/mp4">

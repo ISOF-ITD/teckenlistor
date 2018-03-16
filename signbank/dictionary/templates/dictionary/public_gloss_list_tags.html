@@ -1,4 +1,4 @@
-{% extends "baselayout.html" %}
+{% extends "publicbaselayout.html" %}
 {% load i18n %}
 {% load bootstrap3 %}
 {% load staticfiles %}
@@ -80,15 +80,6 @@ $( document ).ready(function() {
 </p>
           </div>
         </div>
-        <strong>{% blocktrans %}Browse:{% endblocktrans %}</strong>
-        <div class="btn-group" role="group" aria-label="Browse">
-        {% for letter in first_letters %}
-            <a role="button" class="btn btn-default" href="?lang={{request.GET.lang|urlencode}}&search={{letter.0|urlencode}}
-               {% if request.GET.dataset %}&dataset={{request.GET.dataset|urlencode}}{% endif %}">{{letter.0}}</a>
-        {% empty %}
-            {# Put nothing here if results set is empty #}
-        {% endfor %}
-        </div>
         <hr style="margin-top:0px;margin-bottom:8px;">
         <ul class="nav nav-pills" style="background-color:#fcfdff;">
             <li role="presentation" {% if 'lang' not in request.GET or request.GET.lang == '' %}class="active"{% endif %}>
@@ -115,7 +106,7 @@ $( document ).ready(function() {
             <form action="{% url 'dictionary:public_gloss_list' %}" method="get" class="form">
 
                 {#ISOF kategorier som tag#}
-                <div class="category">
+                <div class="panel-body">
                 <select name="tags" >
                     <option value='' selected="selected">Kategorier:</option>
                     {% for tag in tags %}
@@ -128,21 +119,33 @@ $( document ).ready(function() {
                 <input type="hidden" name="lang" value="{{request.GET.lang|urlencode}}">
                 {% bootstrap_field searchform.search bound_css_class="not-bound" %}
                 <div class="form-group">
-                    {% bootstrap_label searchform.dataset.label label_for="id_dataset" label_class="control-label" %}
-                    <div id="id_dataset">
-                    {% for checkbox in searchform.dataset %}{# Doing this manually so that we can add 'span label'. #}
-                    <div class="checkbox" style="display: inline-block;margin-top:0px;"><label for="{{checkbox.id_for_label}}">
-                        {{ checkbox.tag }} <span class="dataset-{{checkbox.data.value}}-color label label-default">{{ checkbox.choice_label }}</span></label>
-                    </div>
-                    {% endfor %}
-                        <div class="help-block hidden-xs" style="display:inline-block;">{{searchform.dataset.help_text}}</div>
-                    </div>
+{#                    {% bootstrap_label searchform.dataset.label label_for="id_dataset" label_class="control-label" %}#}
+{#                    <div id="id_dataset">#}
+{#                    {% for checkbox in searchform.dataset %}{# Doing this manually so that we can add 'span label'. #}
+{#                    <div class="checkbox" style="display: inline-block;margin-top:0px;"><label for="{{checkbox.id_for_label}}">#}
+{#                        {{ checkbox.tag }} <span class="dataset-{{checkbox.data.value}}-color label label-default">{{ checkbox.choice_label }}</span></label>#}
+{#                    </div>#}
+{#                    {% endfor %}#}
+{#                        <div class="help-block hidden-xs" style="display:inline-block;">{{searchform.dataset.help_text}}</div>#}
+{#                    </div>#}
                 </div>
                     <button type="submit" class="btn btn-primary">
                         {% blocktrans context "public_search" %}Search{% endblocktrans %}
                     </button>
             </form>
             </div>
+        </div>
+    </div>
+
+    <div class="panel-body">
+        <strong>{% blocktrans %}Browse:{% endblocktrans %}</strong>
+        <div class="btn-group" role="group" aria-label="Browse">
+        {% for letter in first_letters %}
+            <a role="button" class="btn btn-default" href="?lang={{request.GET.lang|urlencode}}&search={{letter.0|urlencode}}
+               {% if request.GET.dataset %}&dataset={{request.GET.dataset|urlencode}}{% endif %}">{{letter.0}}</a>
+        {% empty %}
+            {# Put nothing here if results set is empty #}
+        {% endfor %}
         </div>
     </div>
 </div>
@@ -154,11 +157,14 @@ $( document ).ready(function() {
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-md-12">
-                    <a class="btn-block" href="{{obj.get_public_absolute_url}}"><h3 class="panel-title gloss-idgloss" style="text-align:center;">{{obj}}</h3>
-                        <span style="color:black;"><span class="glyphicon glyphicon-film" aria-hidden="true"
-                              title="{% blocktrans context "videocount" %}Videos{% endblocktrans %}"></span>
+                    <a class="btn-block" href="{{obj.get_public_absolute_url}}"><h3 class="panel-title gloss-idgloss" style="text-align:center;float:left">{{obj}}</h3>
+{#                        <span style="color:black;"><span class="glyphicon glyphicon-film" aria-hidden="true"#}
+{#                              title="{% blocktrans context "videocount" %}Videos{% endblocktrans %}"></span>#}
+                        <span  style="color:black;float:right"><span class="glyphicon glyphicon-film" aria-hidden="true"
+                              title="{% blocktrans context "videocount" %}Videos{% endblocktrans %}">
+                        </span>
                         {{obj.glossvideo_set.count}}</span>
-                        <span class="dataset-{{obj.dataset.id}}-color label label-default" style="float:right;margin-top:2px;">{{obj.dataset}}</span>
+                        <span class="dataset-{{obj.dataset.id}}-color label label-default hide-video" style="float:right;margin-top:2px;">{{obj.dataset}}</span>
                     </a>
                     </div>
                 </div>
