@@ -12,7 +12,8 @@ DEBUG = True
 # A list of directories where Django looks for translation files.
 LOCALE_PATHS = (
     # '/home/heilniem/signbank-fi/locale',
-    'C://Users//localperla331//PycharmProjects//FinSLsignbank//locale',
+    'C://utv//testPyCharmCE//FinSLsignbank//locale',
+    # 'C://Users//localperla331//PycharmProjects//FinSLsignbank//locale',
 )
 
 # The absolute path to the directory where collectstatic will collect static files for deployment.
