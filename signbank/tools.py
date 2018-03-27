@@ -58,8 +58,8 @@ def infopage(request):
     context["gloss_count"] = Gloss.objects.all().count()
 
     context["glossvideo_count"] = GlossVideo.objects.all().count()
-    context["glosses_with_video"] = GlossVideo.objects.filter(gloss__isnull=False).order_by("gloss_id")\
-        .distinct("gloss_id").count()
+    context["glosses_with_video"] = GlossVideo.objects.filter(gloss__isnull=False).order_by("gloss_id") \
+        .values_list('gloss_id').distinct().count()
     context["glossless_video_count"] = GlossVideo.objects.filter(gloss__isnull=True).count()
     context["glossvideo_poster_count"] = GlossVideo.objects.exclude(Q(posterfile="") | Q(posterfile__isnull=True)).count()
     context["glossvideo_noposter_count"] = context["glossvideo_count"] - context["glossvideo_poster_count"]
@@ -75,8 +75,8 @@ def infopage(request):
         dset["gloss_count"] = Gloss.objects.filter(dataset=d).count()
 
         dset["glossvideo_count"] = GlossVideo.objects.filter(gloss__dataset=d).count()
-        dset["glosses_with_video"] = GlossVideo.objects.filter(gloss__isnull=False, gloss__dataset=d).order_by("gloss_id")\
-            .distinct("gloss_id").count()
+        dset["glosses_with_video"] = GlossVideo.objects.filter(gloss__isnull=False, gloss__dataset=d).order_by("gloss_id") \
+            .values_list('gloss_id').distinct().count()
         dset["glossless_video_count"] = GlossVideo.objects.filter(gloss__isnull=True, dataset=d).count()
         dset["glossvideo_poster_count"] = GlossVideo.objects.filter(dataset=d).exclude(
             Q(posterfile="") | Q(posterfile__isnull=True)).count()
