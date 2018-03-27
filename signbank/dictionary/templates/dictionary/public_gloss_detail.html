@@ -1,4 +1,4 @@
-{% extends "baselayout.html" %}
+{% extends "baselayout_embed.html" %}
 {% load i18n %}
 {% load comments %}
 {% load tagging_tags %}
@@ -8,8 +8,8 @@
     <div class="col-md-10 col-md-offset-1">
         <div class="col-md-12">
             <h2><a href="{{gloss.get_public_absolute_url}}">{{gloss}}</a>
-            <span class="dataset-{{gloss.dataset.id}}-color label label-default">{{gloss.dataset}}</span>
-            {% if gloss.idgloss_en %}/ {{gloss.idgloss_en}}{% endif %}</h2>
+            <!--<span class="dataset-{{gloss.dataset.id}}-color label label-default">{{gloss.dataset}}</span>-->
+            <!--{% if gloss.idgloss_en %}/ {{gloss.idgloss_en}}{% endif %}</h2>-->
         </div>
         <div class="col-md-6">
             <h4>{% blocktrans %}Translation equivalents{% endblocktrans %}</h4>
