@@ -17,7 +17,7 @@ ALLOWED_HOSTS = ['frigg-test.sprakochfolkminnen.se']
 
 # A list of directories where Django looks for translation files.
 LOCALE_PATHS = (
-    '/home/signbank/signbank-fi/locale',
+    '/var/www/django/teckenlistor/locale',
 )
 
 # The absolute path to the directory where collectstatic will collect static files for deployment.
