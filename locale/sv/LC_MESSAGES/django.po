@@ -312,11 +312,11 @@ msgstr "Alla teckenspråk"
 #: .\signbank\dictionary\forms.py:332 .\signbank\dictionary\models.py:39
 #: .\templates\infopage.html:110
 msgid "Lexicon"
-msgstr ""
+msgstr "Lexikon"
 
 #: .\signbank\dictionary\forms.py:333
 msgid "You can limit the search to these lexicons."
-msgstr ""
+msgstr "Du kan begränsa sökningen till dessa lexikon."
 
 #: .\signbank\dictionary\models.py:37
 msgid "View dataset"
@@ -343,7 +343,7 @@ msgstr ""
 #: .\signbank\dictionary\templates\dictionary\public_gloss_detail.html:15
 #: .\templates\infopage.html:49 .\templates\infopage.html:140
 msgid "Translation equivalents"
-msgstr ""
+msgstr "Ekvivalenta översättningar"
 
 #: .\signbank\dictionary\models.py:89
 msgid "Keyword"
@@ -474,7 +474,7 @@ msgstr ""
 #: .\signbank\dictionary\templates\dictionary\admin_gloss_list.html:210
 #: .\signbank\dictionary\templates\dictionary\public_gloss_detail.html:23
 msgid "Notes"
-msgstr ""
+msgstr "Noter"
 
 #. Translators: Gloss models field: handedness, verbose name
 #: .\signbank\dictionary\models.py:261
@@ -983,16 +983,16 @@ msgstr ""
 #: .\signbank\dictionary\templates\dictionary\gloss_detail_relations.html:24
 #: .\signbank\dictionary\templates\dictionary\public_gloss_detail.html:70
 msgid "No relations."
-msgstr ""
+msgstr "Inga relationer."
 
 #: .\signbank\dictionary\templates\dictionary\gloss_detail_relations.html:32
 msgid "Add relation"
-msgstr ""
+msgstr "Lägg till relation"
 
 #: .\signbank\dictionary\templates\dictionary\gloss_detail_relations.html:46
 #: .\signbank\dictionary\templates\dictionary\public_gloss_detail.html:90
 msgid "No reverse relations."
-msgstr ""
+msgstr "Inga reverserade relationer."
 
 #. Translators:
 #: .\signbank\dictionary\templates\dictionary\gloss_list.html:18
@@ -1105,27 +1105,27 @@ msgstr ""
 
 #: .\signbank\dictionary\templates\dictionary\public_gloss_detail.html:19
 msgid "<em>No translations.</em>"
-msgstr ""
+msgstr "<em>Inga översättningar.</em>"
 
 #: .\signbank\dictionary\templates\dictionary\public_gloss_detail.html:25
 msgid "No notes."
-msgstr ""
+msgstr "Inga noter."
 
 #: .\signbank\dictionary\templates\dictionary\public_gloss_detail.html:54
 msgid "Relations to glosses"
-msgstr ""
+msgstr "Relationer till tecken"
 
 #: .\signbank\dictionary\templates\dictionary\public_gloss_detail.html:58
 msgid "Relations from this gloss"
-msgstr ""
+msgstr "Relationer från detta tecken"
 
 #: .\signbank\dictionary\templates\dictionary\public_gloss_detail.html:78
 msgid "Relations to this gloss"
-msgstr ""
+msgstr "Relationer till detta tecken"
 
 #: .\signbank\dictionary\templates\dictionary\public_gloss_detail.html:104
 msgid "Show comments"
-msgstr ""
+msgstr "Visa kommentarer"
 
 #: .\signbank\dictionary\templates\dictionary\public_gloss_detail.html:124
 #: .\templates\comments\list.html:47
@@ -1213,7 +1213,7 @@ msgstr "Översättningar"
 #: .\signbank\dictionary\templates\dictionary\public_gloss_list_tags.html:202
 #: .\signbank\dictionary\templates\dictionary\public_gloss_list_tags_test_autocomplete.html:227
 msgid "No translations in"
-msgstr "Inga översättningar i"
+msgstr "Inga översättningar på"
 
 #: .\signbank\dictionary\templates\dictionary\public_gloss_list.html:166
 #: .\signbank\dictionary\templates\dictionary\public_gloss_list_tags.html:214
