@@ -298,6 +298,13 @@ td .tag {
 .hide-video {
     display:none;
 }
+.row-m-b-small {
+  margin-bottom: 5px;
+}
+.row-p-small {
+  padding: 4px 4px;
+}
+}
 .video-public {
     cursor:pointer;
 }
