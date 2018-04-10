@@ -9,6 +9,8 @@ import os
 # *** In production run bin/production.py to use production settings.
 # settings_secret.py is imported in this settings file, you should put the sensitive information in that file.
 
+CORS_ORIGIN_ALLOW_ALL = True
+
 # Absolute path to the base directory of the application.
 BASE_DIR = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 # Path to the project directory.
@@ -58,6 +60,7 @@ STATICFILES_FINDERS = (
 MIDDLEWARE = [
     # If want to use some of the HTTPS settings in secret_settings, enable SecurityMiddleware
     #'django.middleware.security.SecurityMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -132,6 +135,7 @@ INSTALLED_APPS = (
     'django_comments',
     'guardian',
     'notifications',
+    'corsheaders',
 )
 
 # Location for upload of videos relative to MEDIA_ROOT, videos are stored here prior to copying over to the main
