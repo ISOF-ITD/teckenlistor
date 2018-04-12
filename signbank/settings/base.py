@@ -10,6 +10,7 @@ import os
 # settings_secret.py is imported in this settings file, you should put the sensitive information in that file.
 
 CORS_ORIGIN_ALLOW_ALL = True
+X_FRAME_OPTIONS = 'ALLOW-FROM http://www.sprakochfolkminnen.se/'
 
 # Absolute path to the base directory of the application.
 BASE_DIR = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
