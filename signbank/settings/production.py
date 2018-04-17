@@ -13,7 +13,8 @@ PROJECT_NAME = '/teckenlistor'
 DEBUG = False
 
 # IMPORTANT: The hostname that this signbank runs on, this prevents HTTP Host header attacks
-ALLOWED_HOSTS = ['frigg-test.sprakochfolkminnen.se']
+# Is set in settings_secrets:
+# ALLOWED_HOSTS = ['frigg-test.sprakochfolkminnen.se']
 
 # A list of directories where Django looks for translation files.
 LOCALE_PATHS = (
