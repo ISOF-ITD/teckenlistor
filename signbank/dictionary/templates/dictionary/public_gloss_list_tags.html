@@ -80,15 +80,15 @@ $( document ).ready(function() {
 </p>
           </div>
         </div>
-        <hr style="margin-top:0px;margin-bottom:8px;">
-        <ul class="nav nav-pills" style="background-color:#fcfdff;">
-            <li role="presentation" {% if 'lang' not in request.GET or request.GET.lang == '' %}class="active"{% endif %}>
-            <a href="?lang=&search={{request.GET.search|urlencode}}">{% blocktrans %}All sign languages{% endblocktrans %}</a></li>
-            {% for signlang in signlanguages %}
-            <li role="presentation" {% if request.GET.lang == signlang.language_code_3char %}class="active"{% endif %}>
-                <a href="?lang={{signlang.language_code_3char|urlencode}}&search={{request.GET.search|urlencode}}">{{ signlang.name }}</a></li>
-            {% endfor %}
-        </ul>
+        <!--<hr style="margin-top:0px;margin-bottom:8px;">-->
+        <!--<ul class="nav nav-pills" style="background-color:#fcfdff;">-->
+            <!--<li role="presentation" {% if 'lang' not in request.GET or request.GET.lang == '' %}class="active"{% endif %}>-->
+            <!--<a href="?lang=&search={{request.GET.search|urlencode}}">{% blocktrans %}All sign languages{% endblocktrans %}</a></li>-->
+            <!--{% for signlang in signlanguages %}-->
+            <!--<li role="presentation" {% if request.GET.lang == signlang.language_code_3char %}class="active"{% endif %}>-->
+                <!--<a href="?lang={{signlang.language_code_3char|urlencode}}&search={{request.GET.search|urlencode}}">{{ signlang.name }}</a></li>-->
+            <!--{% endfor %}-->
+        <!--</ul>-->
         {# Search form #}
 
         {# from admin_gloss_list.html    #}
