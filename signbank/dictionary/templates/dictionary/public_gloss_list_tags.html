@@ -162,7 +162,17 @@ $( document ).ready(function() {
             <div class="panel-heading row-p-small">
                 <div class="row">
                     <div class="col-md-12">
-                    <a class="btn-block" href="{{obj.get_public_absolute_url}}"><h3 class="panel-title gloss-idgloss" style="text-align:center;float:left">{{obj}}</h3>
+                    <a class="btn-block" href="{{obj.get_public_absolute_url}}"><h3 class="panel-title gloss-idgloss" style="text-align:center;float:left">
+                        {% for trans in obj.translation_set.all %}
+                            {{ trans.keyword }},
+                            <!--{% if forloop.last %}-->
+                            <!--{{ trans.keyword }}-->
+                            <!--{% endif %}-->
+                        {% empty %}
+                            <em>{% blocktrans %}No translations in{% endblocktrans %} {{ lang.name_local }}.</em>
+                        {% endfor %}
+                    </h3>
+                    <!--<a class="btn-block" href="{{obj.get_public_absolute_url}}"><h3 class="panel-title gloss-idgloss" style="text-align:center;float:left">{{obj}}</h3>-->
 {#                        <span style="color:black;"><span class="glyphicon glyphicon-film" aria-hidden="true"#}
 {#                              title="{% blocktrans context "videocount" %}Videos{% endblocktrans %}"></span>#}
                         <span  style="color:black;float:right"><span class="glyphicon glyphicon-film" aria-hidden="true"
