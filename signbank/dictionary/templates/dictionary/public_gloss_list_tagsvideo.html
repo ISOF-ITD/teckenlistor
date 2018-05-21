@@ -1,0 +1,262 @@
+{% extends "baselayout_embed.html" %}
+{% load i18n %}
+{% load bootstrap3 %}
+{% load staticfiles %}
+{% block extrajs %}
+
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" media="all"/>
+
+{#<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" type="text/javascript">#}
+{#</script> <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js" type="text/javascript"></script>#}
+
+{#<link rel="stylesheet" href="{% static "css/jquery-ui" %}">#}
+<script src="{% static "js/mark.min.js" %}"></script>
+<script src="{% static "js/jquery-ui.js" %}"></script>
+<script>
+/* Use mark.js to mark the keywords user searched for.
+This is not a bullet proof solution, especially when it comes to word boundaries;
+Javascript does not generally support UTF-8 word boundaries.
+*/
+$( document ).ready(function() {
+    var kwdToMark = "{{request.GET.search}}";
+    if (kwdToMark.length > 1) {
+        var markGloss = new Mark(document.querySelectorAll("h3.gloss-idgloss"));
+        var markKeywords = new Mark(document.querySelectorAll("span.gloss-keywords"));
+        var markKeywordsOptions = {"exclude": ["em", ".ignore"],};
+        var glossRE = new RegExp("^" + kwdToMark, "gmi");
+        var keywordRE = new RegExp("(\\s" + kwdToMark + ")", "gmi");
+
+        markGloss.unmark({
+            done: function(){
+                markGloss.markRegExp(glossRE);
+            },
+        });
+        markKeywords.unmark({
+            done: function(){
+                markKeywords.markRegExp(keywordRE, markKeywordsOptions);
+            },
+        });
+    }
+});
+</script>
+
+{#        http://blog.appliedinformaticsinc.com/autocomplete-input-field-in-django-template-with-jquery-ui/        #}
+<script type="text/javascript">
+  $( function() {
+    $( "#id_search" ).autocomplete({
+            source: '{% url 'dictionary:gloss_autocomplete' %}', minLength: 2,
+    });
+  } );
+</script>
+
+{% endblock %}
+{% block content %}
+{% get_language_info for LANGUAGE_CODE as lang %}
+<div class="row">
+    <div class="col-md-12">
+        <h2>{% blocktrans %}Search signs{% endblocktrans %}
+            <small>{% blocktrans %}By gloss or translation equivalents{% endblocktrans %}
+                <button class="btn btn-default" type="button" data-toggle="collapse" data-target="#collapseHelp" aria-expanded="false" aria-controls="collapseHelp">
+          {% blocktrans %}Help{% endblocktrans %} <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+        </button></small></h2>
+
+        <div class="collapse" id="collapseHelp">
+          <div class="well">
+<p>
+{% blocktrans %}This Signbank holds sign language signs in multiple different sign languages.
+    Search the signs by translations of the signs (or by an identifying name "gloss"), the results are matched from the
+    beginning of a word.
+    For quick browsing of signs a list of starting letters is provided in the top of the page.
+    Find the available sign languages on top of the search box, select one to narrow down your search results.
+    Filter the results even further by selecting one or multiple lexicons under the search box, which represent a set
+    of signs maintained by a given organisation.{% endblocktrans %}
+</p>
+<p>
+{% blocktrans %}To play a video, click on top of the video (image), and pause the video by clicking on it again.
+    To see more detailed information about a sign (gloss), click on the text on top of a video box in the
+    search results. Some signs have more than one video, the additional videos can be viewed from the detail
+    information page by clicking on the sign title.
+    {% endblocktrans %}
+</p>
+          </div>
+        </div>
+        <!--<hr style="margin-top:0px;margin-bottom:8px;">-->
+        <!--<ul class="nav nav-pills" style="background-color:#fcfdff;">-->
+            <!--<li role="presentation" {% if 'lang' not in request.GET or request.GET.lang == '' %}class="active"{% endif %}>-->
+            <!--<a href="?lang=&search={{request.GET.search|urlencode}}">{% blocktrans %}All sign languages{% endblocktrans %}</a></li>-->
+            <!--{% for signlang in signlanguages %}-->
+            <!--<li role="presentation" {% if request.GET.lang == signlang.language_code_3char %}class="active"{% endif %}>-->
+                <!--<a href="?lang={{signlang.language_code_3char|urlencode}}&search={{request.GET.search|urlencode}}">{{ signlang.name }}</a></li>-->
+            <!--{% endfor %}-->
+        <!--</ul>-->
+        {# Search form #}
+
+        {# from admin_gloss_list.html    #}
+{#                <div class="col-md-6 col-sm-6 searchinput">#}
+{#                   <div class="input-group">#}
+{#                       <label class="input-group-addon" for="id_tags">{{searchform.tags.label}}</label>#}
+{#                       {% searchform.tags show_label=False bound_css_class="not-bound" %}#}
+{#                       {% bootstrap_field searchform.tags show_label=False bound_css_class="not-bound" %}#}
+{#                   </div>#}
+{#                </div>#}
+
+        <div class="panel panel-default">
+
+            <div class="panel-body">
+            <form action="{% url 'dictionary:public_gloss_list' %}" method="get" class="form">
+
+                {#ISOF kategorier som tag#}
+                <div class="panel-body">
+                <select name="tags" >
+                    <option value='' selected="selected">Kategorier:</option>
+                        <option value=8>arbetsmarknad</option>
+                        <option value=7>föreningsliv</option>
+                        <option value=2>politik</option>
+                        <option value=9>socialförsäkring</option>
+                        <option value=6>statsskick</option>
+                    <!--{% for tag in tags %}-->
+                        <!--<option value={{ tag.id }}>{{ tag }}</option>-->
+                    <!--{% endfor %}-->
+                </select>
+                <br/>
+                </div>
+
+                <input type="hidden" name="lang" value="{{request.GET.lang|urlencode}}">
+                {% bootstrap_field searchform.search bound_css_class="not-bound" %}
+                <div class="form-group">
+{#                    {% bootstrap_label searchform.dataset.label label_for="id_dataset" label_class="control-label" %}#}
+{#                    <div id="id_dataset">#}
+{#                    {% for checkbox in searchform.dataset %}{# Doing this manually so that we can add 'span label'. #}
+{#                    <div class="checkbox" style="display: inline-block;margin-top:0px;"><label for="{{checkbox.id_for_label}}">#}
+{#                        {{ checkbox.tag }} <span class="dataset-{{checkbox.data.value}}-color label label-default">{{ checkbox.choice_label }}</span></label>#}
+{#                    </div>#}
+{#                    {% endfor %}#}
+{#                        <div class="help-block hidden-xs" style="display:inline-block;">{{searchform.dataset.help_text}}</div>#}
+{#                    </div>#}
+                </div>
+                    <button type="submit" class="btn btn-primary">
+                        {% blocktrans context "public_search" %}Search{% endblocktrans %}
+                    </button>
+            </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel-body">
+        <strong>{% blocktrans %}Browse:{% endblocktrans %}</strong>
+        <div class="btn-group" role="group" aria-label="Browse">
+        {% for letter in first_letters %}
+            <a role="button" class="btn btn-default" href="?lang={{request.GET.lang|urlencode}}&search={{letter.0|urlencode}}
+               {% if request.GET.dataset %}&dataset={{request.GET.dataset|urlencode}}{% endif %}">{{letter.0}}</a>
+        {% empty %}
+            {# Put nothing here if results set is empty #}
+        {% endfor %}
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+<div class="row">
+    {% for obj in object_list %}
+    <div class="col-md-3 col-sm-6 col-xs-12 col-public-list">
+        <div class="panel panel-default row-m-b-small">
+            <div class="panel-heading row-p-small">
+                <div class="row">
+                    <div class="col-md-12">
+                    <a class="btn-block" href="{{obj.get_public_absolute_url}}"><h3 class="panel-title gloss-idgloss" style="text-align:center;float:left">
+                        {% for trans in obj.translation_set.all %}
+                            {{ trans.keyword }}{% if not forloop.last %},{% endif %}
+                        {% empty %}
+                            <em>{% blocktrans %}No translations in{% endblocktrans %} {{ lang.name_local }}.</em>
+                        {% endfor %}
+                    </h3>
+                    <!--<a class="btn-block" href="{{obj.get_public_absolute_url}}"><h3 class="panel-title gloss-idgloss" style="text-align:center;float:left">{{obj}}</h3>-->
+{#                        <span style="color:black;"><span class="glyphicon glyphicon-film" aria-hidden="true"#}
+{#                              title="{% blocktrans context "videocount" %}Videos{% endblocktrans %}"></span>#}
+                        <span  style="color:black;float:right"><span class="glyphicon glyphicon-film" aria-hidden="true"
+                              title="{% blocktrans context "videocount" %}Videos{% endblocktrans %}">
+                        </span>
+                        {{obj.glossvideo_set.count}}</span>
+                        <span class="dataset-{{obj.dataset.id}}-color label label-default hide-video" style="float:right;margin-top:2px;">{{obj.dataset}}</span>
+                    </a>
+                    </div>
+                </div>
+            </div>
+             <div class="panel-body embed-responsive embed-responsive-16by9 hide-video"
+                 {% if obj.glossvideo_set.all.count > 0 %}style="background-color:rgb(33,33,33);"{% endif %}>
+            {% if obj.glossvideo_set.all.0 %}
+                <video id="glossvideo-{{obj.glossvideo_set.all.0.pk}}" class="video-public" preload="metadata" muted
+{% if obj.glossvideo_set.all.0.posterfile %} poster="{{obj.glossvideo_set.all.0.posterfile.url|urlencode}}"{% endif %}
+                onclick="this.paused?this.play():this.pause();" playsinline>
+                {% if obj.glossvideo_set.all.0.get_extension == '.mp4' %}
+{#                    <source src="{{obj.glossvideo_set.all.0.videofile.url|urlencode}}" type="video/mp4">#}
+                    <source src="{{obj.glossvideo_set.all.0.get_absolute_url|urlencode}}" type="video/mp4">
+                {% elif obj.glossvideo_set.all.0.get_extension == '.webm' %}
+                    <source src="{{obj.glossvideo_set.all.0.videofile.url|urlencode}}" type="video/webm">
+                {% endif %}
+                    {% blocktrans %}Your browser does not support the video tag.{% endblocktrans %}
+                </video>
+            {% else %}
+                <p><em>{% blocktrans %}No video.{% endblocktrans %}</em></p>
+            {% endif %}
+            </div>
+            <div class="panel-footer hide-video">
+            <h4>{% blocktrans context "publicglosslist" %}Translations{% endblocktrans %} ({{ lang.name_local }}):</h4>
+            <span class="gloss-keywords">
+            {% if obj.glosstranslations_set.exists %}
+                {{ obj.glosstranslations_set.all.0 }}
+            {% else %}
+            {% for trans in obj.translation_set.all %}
+                {{ trans.keyword }},
+                {% if forloop.last %}
+                {{ trans.keyword }}
+                {% endif %}
+            {% empty %}
+                <em>{% blocktrans %}No translations in{% endblocktrans %} {{ lang.name_local }}.</em>
+            {% endfor %}
+            {% endif %}
+            </span>
+            </div>
+        </div>
+    </div>
+    {# These are used to fox horizontal alignment for grid. #}
+    {% if forloop.counter|divisibleby:"4" %}<div class="clearfix visible-lg-block visible-md-block"></div>{% endif %}
+    {% if forloop.counter|divisibleby:"2" %}<div class="clearfix visible-sm-block"></div>{% endif %}
+    {% empty %}
+    <div class="col-md-12">
+        <p><em>{% blocktrans %}No results.{% endblocktrans %}</em></p>
+    </div>
+    {% endfor %}
+</div>
+<div class="pagination">
+    <span class="step-links">
+    <ul class='pagination pagination-sm'>
+        {% if page_obj.has_previous %}
+            <li><a href="?page={{ page_obj.previous_page_number }}{% for key,value in request.GET.items %}{% ifnotequal key 'page' %}&{{ key }}={{ value }}{% endifnotequal %}{% endfor %}">&laquo;</a></li>
+        {% endif %}
+        {% if  page_obj.number > 10 %}
+        <li><a>...</a></li>
+        {% endif %}
+
+        {% for p in page_obj.paginator.page_range %}
+            {% if p < page_obj.number|add:"10" and  p > page_obj.number|add:"-10" %}
+            <li {% if p == page_obj.number %}class='active'{% endif %}>
+            <a href="?page={{ p }}{% for key,value in request.GET.items %}{% if not key == 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">{% if p == 0 %}Start{% else %}{{p}}{% endif %}</a>
+            </li>
+            {% endif %}
+        {% endfor %}
+
+        {% if page_obj.paginator.num_pages > page_obj.number|add:"10" %}
+        <li><a>...</a></li>
+        <li>
+            <a href="?page={{ page_obj.paginator.num_pages }}{% for key,value in request.GET.items %}{% if not key == 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">{{page_obj.paginator.num_pages}}</a>
+        </li>
+        {% endif %}
+
+        {% if page_obj.has_next %}
+            <li><a href="?page={{ page_obj.next_page_number }}{% for key,value in request.GET.items %}{% if not key == 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">&raquo;</a></li>
+        {% endif %}
+    </ul>
+    </span>
+</div>
+</div>
+{% endblock %}

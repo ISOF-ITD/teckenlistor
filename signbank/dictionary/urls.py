@@ -75,6 +75,8 @@ urlpatterns = [
     # ISOF test:
     url(r'^public/glosstags/$', publicviews.GlossListPublicTagsView.as_view(), name='public_gloss_list'),
     url(r'^public/glosstags/(?P<pk>\d+)', publicviews.GlossDetailPublicView.as_view(), name='public_gloss_view'),
+    url(r'^public/glosstagsvideo/$', publicviews.GlossListPublicTagsVideoView.as_view(), name='public_gloss_list_tagsvideo'),
+    url(r'^public/glosstagsvideo/(?P<pk>\d+)', publicviews.GlossDetailPublicView.as_view(), name='public_gloss_view'),
     url(
         r'^gloss-autocomplete/$',
         GlossAutoCompleteView.as_view(),
