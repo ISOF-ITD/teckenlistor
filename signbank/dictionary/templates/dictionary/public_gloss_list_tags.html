@@ -164,10 +164,7 @@ $( document ).ready(function() {
                     <div class="col-md-12">
                     <a class="btn-block" href="{{obj.get_public_absolute_url}}"><h3 class="panel-title gloss-idgloss" style="text-align:center;float:left">
                         {% for trans in obj.translation_set.all %}
-                            {{ trans.keyword }},
-                            <!--{% if forloop.last %}-->
-                            <!--{{ trans.keyword }}-->
-                            <!--{% endif %}-->
+                            {{ trans.keyword }}{% if not forloop.last %},{% endif %}
                         {% empty %}
                             <em>{% blocktrans %}No translations in{% endblocktrans %} {{ lang.name_local }}.</em>
                         {% endfor %}
