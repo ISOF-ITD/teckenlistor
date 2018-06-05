@@ -66,11 +66,11 @@ class Translation(models.Model):
     gloss = models.ForeignKey("Gloss")
     language = models.ForeignKey("Language")
     keyword = models.ForeignKey("Keyword")
-    idx = models.IntegerField("idx")
+    ordering = models.IntegerField("ordering")
 
     class Meta:
         unique_together = (("gloss", "language", "keyword"),)
-        ordering = ['gloss', 'idx']
+        ordering = ['gloss', 'ordering']
         verbose_name = _('Translation equivalent')
         verbose_name_plural = _('Translation equivalents')
 
