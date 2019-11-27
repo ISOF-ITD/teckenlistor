@@ -16,7 +16,7 @@ from guardian.admin import GuardedModelAdmin
 from tagging.models import TaggedItem, Tag
 
 from .models import Dataset, Gloss, Translation, GlossURL, Language, SignLanguage, Dialect, FieldChoice, GlossRelation,\
-    AllowedTags, GlossTranslations
+    AllowedTags, GlossTranslations, Keyword
 from ..video.admin import GlossVideoInline
 
 
@@ -43,6 +43,10 @@ class TranslationAdmin(admin.ModelAdmin):
     search_fields = ['^keyword__text', '^gloss__idgloss']
     list_filter = ('gloss__dataset',)
     list_display = ('gloss', 'keyword')
+
+class KeywordAdmin(admin.ModelAdmin):
+    search_fields = ['text', ]
+    list_display = ('id', 'text')
 
 
 class TranslationInline(admin.TabularInline):
@@ -221,6 +225,7 @@ admin.site.register(Language, LanguageAdmin)
 admin.site.register(SignLanguage, SignLanguageAdmin)
 admin.site.register(Gloss, GlossAdmin)
 admin.site.register(Translation, TranslationAdmin)
+admin.site.register(Keyword, KeywordAdmin)
 admin.site.register(Dataset, DatasetAdmin)
 admin.site.register(GlossRelation, GlossRelationAdmin)
 admin.site.register(AllowedTags, AllowedTagsAdmin)
