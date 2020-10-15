@@ -45,24 +45,34 @@ LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+        },
         'file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': 'C://Users//localperla331//PycharmProjects//log//signbankdebug.log',
+            'filename': os.path.join(PROJECT_DIR, 'debug.log'),
+            # 'filename': 'C://Users//localperla331//PycharmProjects//log//signbankdebug.log',
         },
     },
     'loggers': {
         'django.request': {
-            'handlers': ['file'],
+            'handlers': ['console'],
             'level': 'DEBUG',
             'propagate': True,
+        },
+        'django.db.backends': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': False,
         },
     },
 }
 
 # Turn on lots of logging
-DO_LOGGING = True
-LOG_FILENAME = "debug.log"
+# DO_LOGGING = True
+# LOG_FILENAME = "debug.log"
 
 if DEBUG:
     # Setting up debug toolbar.
