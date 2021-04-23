@@ -1,11 +1,18 @@
-django==1.11.7
+mysqlclient==1.3.12
+django==1.11.11
 django-tagging==0.4.6
-django-reversion==2.0.11
+django-reversion==2.0.13
 django-bootstrap3==9.1.0
-django-summernote==0.8.8.4
-unicodecsv==0.14.1
-django-modeltranslation==0.12.1
+django-summernote==0.8.8.6
+django-modeltranslation==0.12.2
 django-registration==2.2
 django-contrib-comments==1.8.0
 django-guardian==1.4.9
 django-notifications-hq==1.3
+jsonfield==2.0.2
+django-model-utils==3.1.1
+django-cors-headers==2.1.0
+# extras
+unicodecsv==0.14.1
+# development
+# django-debug-toolbar
